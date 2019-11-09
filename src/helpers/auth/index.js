@@ -1,10 +1,12 @@
-export default class Auth {
+class Auth {
     constructor(){
         this.tokenKey = 'asan-shahr-auth'
         this.auth = localStorage.getItem(this.tokenKey)
+        debugger
     }
 
     getAuth=()=>{
+        debugger
         if(this.auth){
             return true
         }
@@ -23,10 +25,14 @@ export default class Auth {
     }
 }
 
-export default (function(){
-    let instance ;
-    if(instance){
-        instance = new Auth()
+let instanceAuth = (function(){
+    let instance;
+    return ()=>{
+        if(!instance){
+            instance = new Auth()
+        }
+        return instance
     }
-    return instance
-})
+})()
+
+export default instanceAuth()
