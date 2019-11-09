@@ -1,0 +1,3 @@
+let actions ={
+    CHANGE_LOADING_APP:'CHANGE_LOADING_APP'
+}
