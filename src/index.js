@@ -5,8 +5,7 @@ import './index.css';
 import Router from './router';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store'
-
-debugger
+import 'antd/dist/antd.css';
 
 ReactDOM.render(<Provider store={store}><Router/></Provider>, document.getElementById('root'));
 

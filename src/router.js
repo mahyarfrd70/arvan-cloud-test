@@ -6,20 +6,22 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { Spin, Input } from 'antd';
+import { Spin } from 'antd';
 import './App.css';
 import Auth from './helpers/auth'
-import App from './pages/App'
-import AppActions from './redux/app/actions'
+import AppRouter from './pages/App/AppRouter'
+import authActions from './redux/auth/actions'
 import Login from './pages/Login'
 
+let {checkAuth} = authActions
 
-let ProtectedRout = ({ children, isLoggedIn, ...rest }) => {debugger;return(
+
+let ProtectedRoute = ({ isLoggedIn, component: Component, ...props }) => (
   <Route
-    {...rest}
+    {...props}
     render={({ location }) =>
       isLoggedIn ? (
-        children
+        <Component path={props.path}/>
       ) : (
         <Redirect
           to={{
@@ -30,17 +32,14 @@ let ProtectedRout = ({ children, isLoggedIn, ...rest }) => {debugger;return(
       )
     }
   />
-)}
+)
 
 function Main() {
-
-  const loading = useSelector(state => state.App.loading)
-  const isLoggedIn = useSelector(state => state.App.isLoggedIn)
+  const loading = useSelector(state => state.Auth.loading)
+  const isLoggedIn = useSelector(state => state.Auth.isLoggedIn)
   const dispatch = useDispatch()
-  useEffect(async ()=>{
-      let authStatus = await Auth.getAuth()
-      dispatch({type: AppActions.CHANGE_LOADING_APP , data: false})
-      dispatch({type: AppActions.IS_LOGGED_IN_APP , data: authStatus})
+  useEffect(()=>{
+      dispatch(checkAuth(Auth.getAuth()))
   },[])
   if(loading){
     return <Spin/>
@@ -51,9 +50,7 @@ function Main() {
           <Route 
             path="/login" 
             component={Login}/>
-          <ProtectedRout path='/' isLoggedIn={isLoggedIn}>
-            <App/>
-          </ProtectedRout>
+          <ProtectedRoute path='/' isLoggedIn={isLoggedIn} component={AppRouter}/>
         </Switch>
     </Router>
   );

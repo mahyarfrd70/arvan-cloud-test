@@ -1,21 +1,21 @@
 import actions from './actions'
 
 let initState = {
-    userData: [],
-    loading: true
+    loading: true,
+    isLoggedIn: false
 }
 
 export default function(state=initState , action){
     switch(action.type){
-        case actions.GET_USER_LIST_APP: 
-            return {
-                ...state,
-                userData: [...action.data]
-            }
-        case actions.CHANGE_LOADING_APP: 
+        case actions.CHANGE_LOADING_AUTH:
             return {
                 ...state,
                 loading: action.data
+            }
+        case actions.IS_LOGGED_IN_AUTH:
+            return {
+                ...state,
+                isLoggedIn: action.data
             }
         default: 
             return state

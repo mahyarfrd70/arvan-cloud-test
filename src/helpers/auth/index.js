@@ -2,25 +2,28 @@ class Auth {
     constructor(){
         this.tokenKey = 'asan-shahr-auth'
         this.auth = localStorage.getItem(this.tokenKey)
-        debugger
     }
 
     getAuth=()=>{
-        debugger
         if(this.auth){
             return true
         }
         return false
     }
 
-    setAuth = (mobileNumber)=>{
+    setAuth = ( mobileNumber ) => {
         if(mobileNumber){
             localStorage.setItem(this.tokenKey , true)
+            this.auth = true
+            return true
         }
+        return false
+
     }
 
     logOut=(callback)=>{
         localStorage.removeItem(this.tokenKey)
+        this.auth = false
         callback()
     }
 }
