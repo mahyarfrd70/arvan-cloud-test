@@ -1,16 +1,16 @@
 import actions from './actions'
 
 let initState = {
-    loginFormValue: {}
+    registerFormValue: {}
 }
 
 export default function(state=initState , action){
     switch(action.type){
-        case actions.CHANGE_FORM_VALUE_LOGIN:
+        case actions.CHANGE_FORM_VALUE_REGISTER:
             return {
                 ...state,
-                loginFormValue: {
-                    ...state.loginFormValue,
+                registerFormValue: {
+                    ...state.registerFormValue,
                     [action.data.name] : action.data.value
                 }
             }

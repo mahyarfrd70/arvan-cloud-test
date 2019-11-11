@@ -1,0 +1,10 @@
+.login-register-link{
+    font-weight: bold;
+    color: #55595C;
+}
+
+.login-form-container_form .text-link{
+    margin: 5px 0;
+    color:#777777;
+    font-size: 14px;
+}

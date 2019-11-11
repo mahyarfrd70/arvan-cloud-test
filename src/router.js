@@ -12,6 +12,8 @@ import Auth from './helpers/auth'
 import AppRouter from './pages/App/AppRouter'
 import authActions from './redux/auth/actions'
 import Login from './pages/Login'
+import Register from './pages/Register'
+import Alert from './components/alert'
 
 let {checkAuth} = authActions
 
@@ -50,8 +52,12 @@ function Main() {
           <Route 
             path="/login" 
             component={Login}/>
+          <Route 
+            path="/register" 
+            component={Register}/>
           <ProtectedRoute path='/' isLoggedIn={isLoggedIn} component={AppRouter}/>
         </Switch>
+        <Alert time={5000000}/>
     </Router>
   );
 }
