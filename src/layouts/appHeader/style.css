@@ -20,12 +20,11 @@
 
 .app-header-container .header-right-container h6 ,
 .app-header-container .header-right-container p{
-    margin-bottom: 0;
     display: inline;
-
 }
 
 .app-header-container .header-right-container p{
+    margin-bottom: 0!important;
     margin-left: 25px;
 }
 

@@ -8,10 +8,15 @@ class Auth {
 
     getAuth = async ()=>{
         if(this.auth){
-            let response = await Api.get('/user' , {
-                auth: true
-            })
-            return response
+            try{
+                let response = await Api.get('/user' , {
+                    auth: true
+                })
+                return response
+            }catch(err){
+                this.logout()
+                throw ''
+            }
         }
         throw ''
     }

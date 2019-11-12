@@ -3,6 +3,32 @@
     width: 250px;
     background-color: #1C7CD5;
     transition: all 0.5s;
+    color: #fff;
+}
+
+.navbar-app-container h5{
+    margin-bottom: 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.navbar-app-container .nav .nav-item{
+    padding: 10px 40px;
+}
+
+.navbar-app-container .nav a{
+    color: #fff;
+    transition: all 0.5s;
+}
+
+.navbar-app-container .nav a:hover{
+    text-decoration: none;
+    background-color: #ffffff13;
+}
+
+.navbar-app-container .nav a.active-nav-link{
+    text-decoration: none;
+    background-color: #ffffff3b;
 }
 
 @media (max-width: 992px){
