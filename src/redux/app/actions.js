@@ -1,19 +1,11 @@
-import Api from '../../helpers/services'
+import Api from '../../helpers/api'
 
 let actions={
-    GET_USER_LIST_APP:'GET_USER_LIST_APP',
+    SET_USER_DATA_APP:'SET_USER_DATA_APP',
     CHANGE_LOADING_APP: 'CHANGE_LOADING_APP',
-    getUserList: () => {
-        return async dispatch => {
-            dispatch({type: actions.CHANGE_LOADING_APP , data: true})
-            try{
-                let response = await Api.get('api/offers?pageSize=10&pageNumber=1')
-                dispatch({type: actions.GET_USER_LIST_APP , data: response.data})
-                dispatch({type: actions.CHANGE_LOADING_APP , data: false})
-                return response
-            }catch(err){
-                throw err
-            }
+    setUserData: (userData) => {
+        return dispatch => {
+            dispatch({type: actions.SET_USER_DATA_APP , data: userData})
         }
     }
 }

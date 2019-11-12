@@ -1,16 +1,16 @@
 import actions from './actions'
 
 let initState = {
-    userData: [],
+    userData: {},
     loading: true
 }
 
 export default function(state=initState , action){
     switch(action.type){
-        case actions.GET_USER_LIST_APP: 
+        case actions.SET_USER_DATA_APP: 
             return {
                 ...state,
-                userData: [...action.data]
+                userData: {...action.data}
             }
         case actions.CHANGE_LOADING_APP: 
             return {
