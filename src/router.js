@@ -46,8 +46,8 @@ function Main() {
     try{
       let response = await Auth.getAuth();
       let {data: {user: { username , email , image , token}}} = response
-      dispatch(setAuth(token))
       dispatch(setUserData({username , email , image}))
+      dispatch(setAuth(token))
     }catch(err){
       dispatch(setAuth(err))
     }

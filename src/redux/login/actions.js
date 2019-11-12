@@ -23,8 +23,8 @@ let actions = {
                 )
                 let {data: { user: {username , email , image , token}}} = response
                 dispatch({type: actions.CHANGE_LOADING_LOGIN , data: false})
-                dispatch(setAuth(token))
                 dispatch(setUserData({username , email , image}))
+                dispatch(setAuth(token))
                 return response
             }catch(err){
                 console.log(err)

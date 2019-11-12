@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
 import registerActions from '../../redux/register/actions'
-import LoginLayout from '../../components/loginLayout'
+import LoginLayout from '../../layouts/loginLayout'
 import CustomForm from '../../components/customForm'
 import inputs from './inputObjects'
 import Alert from '../../components/alert'
@@ -20,14 +20,14 @@ export default ({history}) => {
         try{
             let response = await dispatch(registerUser(registerFormValue))
             Alert.show('success' , 'you registered successfully')
-            history.push('/')
+            history.push('/app')
         }catch(err){
             let errorMessages = buildErrorMessage(err.errors)
             Alert.show('danger' , errorMessages)
         }
     }
     if (isLoggedIn) {
-        return <Redirect to='/' />
+        return <Redirect to='/app' />
     }
     return (
         <LoginLayout formTitle='Register'>

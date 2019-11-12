@@ -23,8 +23,8 @@ let actions = {
                 )
                 let {data: {user: {username , email, image, token}}} = response
                 dispatch({type: actions.CHANGE_LOADING_REGISTER , data: false})
-                dispatch(setAuth(token))
                 dispatch(setUserData({username, email, image}))
+                dispatch(setAuth(token))
                 return response
             }catch(err){
                 dispatch({type: actions.CHANGE_LOADING_REGISTER , data: false})

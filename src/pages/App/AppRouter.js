@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import AppLayout from '../../layouts/app'
 import App from './index'
 
 let appRoutes = [
@@ -8,13 +9,13 @@ let appRoutes = [
 
 export default (props) => {
     return (
-        <div>
+        <AppLayout>
             {appRoutes.map((route,i) => (
                 <Route
                     key={i}
                     path={`${props.path}/${route.path}`}
                     component={route.component}/>
             ))}
-        </div>
+        </AppLayout>
     )
 }
