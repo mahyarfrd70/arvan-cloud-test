@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Input, Button, Form, FormGroup, Label, FormFeedback } from 'reactstrap'
 import Alert from '../alert'
+import AlertMessage from '../alert/alertMessage'
+import Loading from '../loading'
 import './style.css'
 
 
@@ -38,7 +40,8 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, ...props}) => {
                 fields[item] = true
             })
             setIsInvalidField({...fields})
-            Alert.show('salam' , 'success')
+            let message = <AlertMessage title={props.errorTitle} description={props.errorDescription}/> 
+            Alert.show('danger' , message )
         }
     }
     return (
@@ -58,11 +61,15 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, ...props}) => {
                     {input.required && <FormFeedback>Required field</FormFeedback>}
                 </FormGroup>
             ))}
-            <Button
-                color="primary"
-                size="sm"
-                block
-                onClick={clickLoginButton}>{buttonTitle}</Button>
+            {props.loading? (
+                <Loading color='primary'/>
+            ):(
+                <Button
+                    color="primary"
+                    size="sm"
+                    block
+                    onClick={clickLoginButton}>{buttonTitle}</Button>
+            )}
         </Form>
     )
 }
