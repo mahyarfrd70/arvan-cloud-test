@@ -1,7 +1,8 @@
 import actions from './actions'
 
 let initState = {
-    loginFormValue: {}
+    loginFormValue: {},
+    loading: false
 }
 
 export default function(state=initState , action){
@@ -13,6 +14,11 @@ export default function(state=initState , action){
                     ...state.loginFormValue,
                     [action.data.name] : action.data.value
                 }
+            }
+        case actions.CHANGE_LOADING_LOGIN:
+            return {
+                ...state,
+                loading: action.data
             }
         default: 
             return state

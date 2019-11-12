@@ -1,19 +1,36 @@
-import Auth from '../../helpers/auth'
-import appActions from '../auth/actions'
+import loginService from '../../services/login'
+import authActions from '../auth/actions'
+import appActions from '../app/actions'
 
-let { checkAuth } = appActions
+let { setAuth } = authActions
+let {setUserData} = appActions
 
 let actions = {
     CHANGE_FORM_VALUE_LOGIN: 'CHANGE_FORM_VALUE_LOGIN',
+    CHANGE_LOADING_LOGIN: 'CHANGE_LOADING_LOGIN',
     changeInputLogin : (e)=>{
         return dispatch=>{
             dispatch({type: actions.CHANGE_FORM_VALUE_LOGIN , data: e.target})
         }
     },
-    loginUser: (mobileNumber) => {
-        return dispatch => {
-            let auth = Auth.setAuth(mobileNumber)
-            dispatch(checkAuth(auth))
+    loginUser: (userData) => {
+        return async dispatch => {
+            dispatch({type: actions.CHANGE_LOADING_LOGIN , data: true})
+            try{
+                let response = await loginService.loginUser(
+                    '/users/login' , 
+                    {user: userData}
+                )
+                let {data: { user: {username , email , image , token}}} = response
+                dispatch({type: actions.CHANGE_LOADING_LOGIN , data: false})
+                dispatch(setAuth(token))
+                dispatch(setUserData({username , email , image}))
+                return response
+            }catch(err){
+                console.log(err)
+                dispatch({type: actions.CHANGE_LOADING_LOGIN , data: false})
+                throw err.response && err.response.data
+            }
         }
     }
 }
