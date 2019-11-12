@@ -9,8 +9,9 @@ let appRoutes = [
 export default (props) => {
     return (
         <div>
-            {appRoutes.map((route) => (
+            {appRoutes.map((route,i) => (
                 <Route
+                    key={i}
                     path={`${props.path}/${route.path}`}
                     component={route.component}/>
             ))}
