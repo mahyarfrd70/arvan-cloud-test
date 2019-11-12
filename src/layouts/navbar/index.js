@@ -3,11 +3,6 @@ import { Nav, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom'
 import './style.css'
 
-let options = [
-    { lable: 'All Articles', href: '/articles' },
-    { lable: 'All Articles', href: '/articles/create' },
-]
-
 export default function Navbar() {
     return (
         <div className='navbar-app-container'>
