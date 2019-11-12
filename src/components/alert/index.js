@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Alert } from 'reactstrap';
+import './style.css'
 
 let instance;
 
@@ -39,7 +40,6 @@ export default class CustomAlret extends Component {
     static show(type , body){
         instance.showAlertLogic(type , body)
     }
-
 
     onDismiss = () => {
         this.resetState()
