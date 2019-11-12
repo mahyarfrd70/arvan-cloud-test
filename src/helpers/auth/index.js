@@ -1,29 +1,28 @@
+import Api from '../api'
+
 class Auth {
     constructor(){
-        this.tokenKey = 'asan-shahr-auth'
-        this.auth = localStorage.getItem(this.tokenKey)
+        this.tokenKey = 'arven-cloud-auth'
+        this.auth = localStorage.getItem(this.tokenKey) || ''
     }
 
-    getAuth=()=>{
+    getAuth = async ()=>{
         if(this.auth){
-            return true
+            let response = await Api.get('/user' , {
+                auth: true
+            })
+            return response
         }
-        return false
+        throw ''
     }
 
-    setAuth = ( mobileNumber ) => {
-        if(mobileNumber){
-            localStorage.setItem(this.tokenKey , true)
-            this.auth = true
-            return true
-        }
-        return false
-
+    setAuth = ( token ) => {
+        localStorage.setItem(this.tokenKey , token)
     }
 
     logOut=(callback)=>{
         localStorage.removeItem(this.tokenKey)
-        this.auth = false
+        this.auth = ''
         callback()
     }
 }

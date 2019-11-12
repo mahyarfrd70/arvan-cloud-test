@@ -1,9 +1,14 @@
+import auth from '../../helpers/auth'
+
 let actions ={
     CHANGE_LOADING_AUTH:'CHANGE_LOADING_AUTH',
-    IS_LOGGED_IN_AUTH: 'IS_LOGGED_IN_AUTH',
-    checkAuth : (authStatus)=>{
+    SET_TOKEN_AUTH: 'SET_TOKEN_AUTH',
+    setAuth : (token)=>{
         return dispatch => {
-            dispatch({type: actions.IS_LOGGED_IN_AUTH , data: authStatus})
+            if(token){
+                auth.setAuth(token)
+            }
+            dispatch({type: actions.SET_TOKEN_AUTH , data: token})
             dispatch({type: actions.CHANGE_LOADING_AUTH , data: false})
         }
     }

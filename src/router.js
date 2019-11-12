@@ -6,16 +6,18 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { Spin } from 'antd';
-import './App.css';
 import Auth from './helpers/auth'
 import AppRouter from './pages/App/AppRouter'
 import authActions from './redux/auth/actions'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Alert from './components/alert'
+import appActions from './redux/app/actions'
+import Loading from './components/loading'
+import './App.css';
 
-let {checkAuth} = authActions
+let {setAuth} = authActions
+let {setUserData} = appActions
 
 
 let ProtectedRoute = ({ isLoggedIn, component: Component, ...props }) => (
@@ -38,13 +40,23 @@ let ProtectedRoute = ({ isLoggedIn, component: Component, ...props }) => (
 
 function Main() {
   const loading = useSelector(state => state.Auth.loading)
-  const isLoggedIn = useSelector(state => state.Auth.isLoggedIn)
+  const isLoggedIn = useSelector(state => state.Auth.idToken ? true : false)
   const dispatch = useDispatch()
+  const getAuth = async () => {
+    try{
+      let response = await Auth.getAuth();
+      let {data: {user: { username , email , image , token}}} = response
+      dispatch(setAuth(token))
+      dispatch(setUserData({username , email , image}))
+    }catch(err){
+      dispatch(setAuth(err))
+    }
+  };
   useEffect(()=>{
-      dispatch(checkAuth(Auth.getAuth()))
+    getAuth()
   },[])
   if(loading){
-    return <Spin/>
+    return <Loading color='primary'/>
   }
   return (
     <Router>
@@ -57,7 +69,7 @@ function Main() {
             component={Register}/>
           <ProtectedRoute path='/' isLoggedIn={isLoggedIn} component={AppRouter}/>
         </Switch>
-        <Alert time={5000000}/>
+        <Alert time={3000}/>
     </Router>
   );
 }

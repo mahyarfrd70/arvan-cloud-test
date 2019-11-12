@@ -2,7 +2,7 @@ import actions from './actions'
 
 let initState = {
     loading: true,
-    isLoggedIn: false
+    idToken: null
 }
 
 export default function(state=initState , action){
@@ -12,10 +12,10 @@ export default function(state=initState , action){
                 ...state,
                 loading: action.data
             }
-        case actions.IS_LOGGED_IN_AUTH:
+        case actions.SET_TOKEN_AUTH:
             return {
                 ...state,
-                isLoggedIn: action.data
+                idToken: action.data
             }
         default: 
             return state
