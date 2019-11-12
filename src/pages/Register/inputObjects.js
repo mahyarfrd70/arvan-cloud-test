@@ -2,7 +2,7 @@ export default [
     { 
         key: 1 , 
         label: 'User', 
-        name: 'user', 
+        name: 'username', 
         type: 'input' , 
         id:'register-user' ,
         placeholder: 'Enter User', 
