@@ -20,17 +20,16 @@ let {setAuth} = authActions
 let {setUserData} = appActions
 
 
-let ProtectedRoute = ({ isLoggedIn, component: Component, ...props }) => (
+let ProtectedRoute = ({ isLoggedIn, component: Component, ...rest }) => (
   <Route
-    {...props}
-    render={({ location }) =>
+    {...rest}
+    render={(props) =>
       isLoggedIn ? (
-        <Component path={props.path}/>
+        <Component {...props}/>
       ) : (
         <Redirect
           to={{
-            pathname: "/login",
-            state: { from: location }
+            pathname: "/login"
           }}
         />
       )
@@ -62,12 +61,18 @@ function Main() {
     <Router>
        <Switch>
           <Route 
-            path="/login" 
-            component={Login}/>
+              path="/login" 
+              component={Login}/>
           <Route 
-            path="/register" 
-            component={Register}/>
-          <ProtectedRoute path='/' isLoggedIn={isLoggedIn} component={AppRouter}/>
+              path="/register" 
+              component={Register}/>
+          <ProtectedRoute 
+              path='/articles'
+              isLoggedIn={isLoggedIn}
+              component={AppRouter}/>
+          <Route 
+              path="/" 
+              component={Login}/>
         </Switch>
         <Alert time={3000}/>
     </Router>

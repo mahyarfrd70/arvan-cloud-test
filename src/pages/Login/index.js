@@ -20,7 +20,7 @@ export default ({history}) => {
         try{
             let response = await dispatch(loginUser(loginFormValue))
             Alert.show('success' , 'you login successfully')
-            history.push('/')
+            history.push('/articles')
         }catch(err){
             console.log(err)
             let errorMessages = buildErrorMessage(err.errors)
@@ -28,7 +28,7 @@ export default ({history}) => {
         }
     }
     if (isLoggedIn) {
-        return <Redirect to='/' />
+        return <Redirect to='/articles' />
     }
     return (
         <LoginLayout formTitle='LOGIN'>

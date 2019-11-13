@@ -26,7 +26,6 @@ class Api {
          }
      }
      post = async (path, body, options = {}) => {
-         console.log(this.headers)
          let configRequest = {
             headers: {...this.buildHeaders(options, config.headers)},
         }

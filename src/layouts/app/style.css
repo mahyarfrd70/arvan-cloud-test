@@ -2,3 +2,19 @@
     width: 100%;
     height: 100%;
 }
+
+.app-content-container{
+    display: inline-block;
+    width: calc(100% - 250px);
+    height: calc(100% - 60px);
+    vertical-align: top;
+    padding: 20px;
+    max-height: calc(100% - 60px);
+    overflow: auto;
+}
+
+@media (max-width: 992px){
+    .app-content-container{
+        width: 100%
+    }
+}

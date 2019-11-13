@@ -1,11 +1,35 @@
-table{
-    width: 100%;
-}
-tr{
-    border-bottom: 1px solid #ccc;
+.articles-container h3 {
+    margin-bottom: 30px;
 }
 
-td, th{
-    text-align: center!important;
-    padding: 10px 0;
+.dropdown-item {
+    border-bottom: 1px solid #ccc!important
+}
+
+.dropdown-menu.show{
+    padding: 0;
+    margin: 0;
+}
+.btn-group-sm>.btn {
+    background-color: #56C0E0;
+    color: #fff;
+}
+.btn-group-sm>.btn:hover{
+    background-color: #56C0E0;
+    color: #fff;
+}
+.show>.btn-secondary.dropdown-toggle{
+    background-color: #56C0E0!important;
+    border-color: transparent!important;
+    color: #fff;
+}
+.btn-group-sm>.btn.right-toggle {
+    border-radius: .2rem 0 0 .2rem;
+    border: 1px solid #56C0E0;
+    border-right: 0.5px solid #ffffff69;
+}
+.btn-group-sm>.btn.left-toggle {
+    border-radius: 0 .2rem .2rem 0;
+    border: 1px solid #56C0E0;
+    border-left: 0.5px solid #ffffff73;
 }

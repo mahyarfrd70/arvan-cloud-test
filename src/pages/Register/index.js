@@ -20,14 +20,14 @@ export default ({history}) => {
         try{
             let response = await dispatch(registerUser(registerFormValue))
             Alert.show('success' , 'you registered successfully')
-            history.push('/app')
+            history.push('/articles')
         }catch(err){
             let errorMessages = buildErrorMessage(err.errors)
             Alert.show('danger' , errorMessages)
         }
     }
     if (isLoggedIn) {
-        return <Redirect to='/app' />
+        return <Redirect to='/articles' />
     }
     return (
         <LoginLayout formTitle='Register'>

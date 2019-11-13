@@ -4,7 +4,7 @@ export default [
         href: '/articles' 
     },
     { 
-        lable: 'All Articles', 
+        lable: 'New Article', 
         href: '/articles/create' 
     },
 ]

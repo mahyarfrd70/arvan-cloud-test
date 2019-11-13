@@ -4,7 +4,7 @@ import './style.css'
 
 export default function Loading({color, size, type, ...props}) {
     return (
-        <div class='loading-container-component'>
+        <div className='loading-container-component'>
             <Spinner size={size} color={color} type={type}/>
         </div>
     )

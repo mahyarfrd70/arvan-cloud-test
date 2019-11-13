@@ -1,0 +1,8 @@
+.pagination{
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination-sm .page-link{
+    color: #55595C
+}

@@ -28,7 +28,9 @@ class Auth {
     logout=(callback)=>{
         localStorage.removeItem(this.tokenKey)
         this.auth = ''
-        callback()
+        if(callback){
+            callback()
+        }
     }
 }
 

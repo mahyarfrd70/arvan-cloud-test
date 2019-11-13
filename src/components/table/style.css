@@ -1,0 +1,47 @@
+.table{
+    min-width: 850px;
+    margin-bottom : 10px !important;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 10px;
+}
+  
+.table-responsive::-webkit-scrollbar-track {
+    box-shadow: transparent; 
+    border-radius: 10px;
+}
+   
+.table-responsive::-webkit-scrollbar-thumb {
+    background: rgb(173, 173, 173); 
+    border-radius: 10px;
+}
+
+.table::-webkit-scrollbar-thumb:hover {
+    background: #818181; 
+}
+
+.table th {
+    color: #777777;
+    font-size: 14px;
+    background-color: #ECEEEF;
+    border-top: unset !important;
+    padding: 8px !important;
+}
+
+.table td {
+    font-size: 14px;
+    color: #55595C;
+    border-top: unset !important;
+    border-bottom: 1px solid #dee2e6!important;
+}
+
+.table td p{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table p {
+    margin: 0
+}

@@ -4,12 +4,14 @@
     background-color: #1C7CD5;
     transition: all 0.5s;
     color: #fff;
+    display: inline-block;
 }
 
 .navbar-app-container h5{
     margin-bottom: 0;
     padding: 10px;
     font-weight: bold;
+    padding-left: 15px;
 }
 
 .navbar-app-container .nav .nav-item{
@@ -19,6 +21,7 @@
 .navbar-app-container .nav a{
     color: #fff;
     transition: all 0.5s;
+    min-width: 250px;
 }
 
 .navbar-app-container .nav a:hover{

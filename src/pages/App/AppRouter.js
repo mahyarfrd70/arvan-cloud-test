@@ -1,20 +1,37 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import AppLayout from '../../layouts/app'
-import App from './index'
+import Articles from './index'
+import NewArticle from '../NewArticle'
 
 let appRoutes = [
-    { path: '', component: App }
+    { 
+        path: '', 
+        component: Articles ,
+        exact: true
+
+    },
+    { 
+        path: 'page/:page', 
+        component: Articles,
+        exact: true
+    },
+    { 
+        path: 'create', 
+        component: NewArticle,
+        exact: true
+    }
 ]
 
 export default (props) => {
     return (
         <AppLayout>
-            {appRoutes.map((route,i) => (
+            {appRoutes.map(route => (
                 <Route
-                    key={i}
-                    path={`${props.path}/${route.path}`}
-                    component={route.component}/>
+                    key={route.path}
+                    path={`${props.match.url}/${route.path}`}
+                    component={route.component}
+                    exact={route.exact}/>
             ))}
         </AppLayout>
     )
