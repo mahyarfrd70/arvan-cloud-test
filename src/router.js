@@ -14,6 +14,7 @@ import Register from './pages/Register'
 import Alert from './components/alert'
 import appActions from './redux/app/actions'
 import Loading from './components/loading'
+import Confirm from '../src/components/confirm'
 import './App.css';
 
 let {setAuth} = authActions
@@ -75,6 +76,7 @@ function Main() {
               component={Login}/>
         </Switch>
         <Alert time={3000}/>
+        <Confirm centered size='sm'/>
     </Router>
   );
 }

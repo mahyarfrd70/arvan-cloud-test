@@ -44,9 +44,12 @@ class Api {
              throw err
          }
      }
-     delete = async (path) => {
+     delete = async (path , options) => {
+        let configRequest = {
+            headers: {...this.buildHeaders(options, config.headers)},
+        }
          try{
-             let response = await Axios.delete(`${config.baseUrl}${path}`)
+             let response = await Axios.delete(`${config.baseUrl}${path}`, configRequest)
              return response
          }catch(err){
              throw err

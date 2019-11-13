@@ -13,6 +13,18 @@ class articlesService {
         }
 
     }
+    deleteArticle = async (path , headers={}) =>{
+        try{
+            let response = await Api.delete(path, {
+                auth: true,
+                headers: headers
+            })
+            return response
+        }catch(err){
+            throw err
+        }
+
+    }
 }
 
 let instanceArticlesService = (function(){

@@ -11,90 +11,16 @@ import Table from '../../components/table'
 import AppLoading from '../../components/appLoading'
 import Alert from '../../components/alert'
 import buildAlertMessage from '../../helpers/buildErrorMessage'
+import Confirm from '../../components/confirm'
 import './style.css'
+import buildErrorMessage from '../../helpers/buildErrorMessage';
 
-let { fetchArticlesActions } = articlesActions
+let { 
+    fetchArticlesActions  , 
+    deleteArticlesActions
+} = articlesActions
 
-let headerOptions = [
-    {
-        label: '#',
-        key: 'index',
-        rendered: (item, object, index) => <p>{index}</p>,
-        style: {
-            maxWidth: '50px',
-            width: '5%'
-        }
-    },
-    {
-        label: 'Title',
-        key: 'title',
-        style: {
-            maxWidth: '140px',
-            width: '15%'
-        }
-    },
-    {
-        label: 'Author',
-        key: 'author',
-        rendered: (item, object, index) => <p>{item.username}</p>,
-        style: {
-            maxWidth: '100px',
-            width: '10%'
-        }
-    },
-    {
-        label: 'Tags',
-        key: 'tagList',
-        rendered: (item, object, index) => {
-            let tags = ''
-            for (let tag of item) {
-                tags += item.indexOf(tag) === 0 ? tag : ` , ${tag}`
-            }
-            return <p>{tags}</p>
-        },
-        style: {
-            maxWidth: '200px',
-            width: '25%'
-        }
-    },
-    {
-        label: 'Exerpt',
-        key: 'body',
-        rendered: (item, object, index) => <p>{`${item.length > 20 ? item.slice(0, 20) + "..." : item}`}</p>,
-        style: {
-            maxWidth: '200px',
-            width: '25%'
-        }
-    },
-    {
-        label: 'Created',
-        key: 'createdAt',
-        rendered: (item, object, index) => <p>salam</p>,
-        style: {
-            maxWidth: '90px',
-            width: '10%'
-        }
-    },
-    {
-        label: '',
-        key: '',
-        width: '',
-        rendered: (item, object, index) => (
-            <UncontrolledDropdown size="sm">
-                <DropdownToggle className='right-toggle'>...</DropdownToggle>
-                <DropdownToggle caret className='left-toggle'/>
-                <DropdownMenu>
-                    <DropdownItem>Edit</DropdownItem>
-                    <DropdownItem>Delete</DropdownItem>
-                </DropdownMenu>
-            </UncontrolledDropdown>
-        ),
-        style: {
-            maxWidth: '70px',
-            width: '10%'
-        }
-    },
-]
+
 
 export default function App(props) {
     let loading = useSelector(state => state.Articles.loading)
@@ -102,6 +28,102 @@ export default function App(props) {
     let { page } = props.match.params
     let pageSize = 10
     let dispatch = useDispatch()
+    // table options array start
+    let headerOptions = [
+        {
+            label: '#',
+            key: 'index',
+            rendered: (item, object, index) => <p>{index}</p>,
+            style: {
+                maxWidth: '50px',
+                width: '5%'
+            }
+        },
+        {
+            label: 'Title',
+            key: 'title',
+            style: {
+                maxWidth: '140px',
+                width: '15%'
+            }
+        },
+        {
+            label: 'Author',
+            key: 'author',
+            rendered: (item, object, index) => <p>{item.username}</p>,
+            style: {
+                maxWidth: '100px',
+                width: '10%'
+            }
+        },
+        {
+            label: 'Tags',
+            key: 'tagList',
+            rendered: (item, object, index) => {
+                let tags = ''
+                for (let tag of item) {
+                    tags += item.indexOf(tag) === 0 ? tag : ` , ${tag}`
+                }
+                return <p>{tags}</p>
+            },
+            style: {
+                maxWidth: '200px',
+                width: '25%'
+            }
+        },
+        {
+            label: 'Exerpt',
+            key: 'body',
+            rendered: (item, object, index) => <p>{`${item.length > 20 ? item.slice(0, 20) + "..." : item}`}</p>,
+            style: {
+                maxWidth: '200px',
+                width: '25%'
+            }
+        },
+        {
+            label: 'Created',
+            key: 'createdAt',
+            rendered: (item, object, index) => <p>salam</p>,
+            style: {
+                maxWidth: '90px',
+                width: '10%'
+            }
+        },
+        {
+            label: '',
+            key: '',
+            width: '',
+            rendered: (item, object, index) => (
+                <UncontrolledDropdown size="sm">
+                    <DropdownToggle className='right-toggle'>...</DropdownToggle>
+                    <DropdownToggle caret className='left-toggle'/>
+                    <DropdownMenu>
+                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem 
+                            onClick={
+                                ()=>Confirm
+                                        .show(()=>showConfirmModal(object , pageSize, page))
+                            }
+                        >Delete</DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
+            ),
+            style: {
+                maxWidth: '70px',
+                width: '10%'
+            }
+        },
+    ]
+    // confirm modal for delete article
+    let showConfirmModal = async (object , pageSize , page)=>{
+        try{
+            await dispatch(deleteArticlesActions(object , pageSize , page ? page : 1))
+            Alert.show('success' , 'Article deleted successfuly')
+        }catch(err){
+            Alert.show('danger' , buildErrorMessage(err.response.data.errors))
+        }
+    }
+    //end
     let fetchArticlesData = async (pageSize, page) => {
         try {
             await dispatch(fetchArticlesActions(pageSize, page ? page : 1))

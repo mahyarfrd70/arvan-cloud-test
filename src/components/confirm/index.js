@@ -1,21 +1,29 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {connect} from 'react-redux'
+import { 
+    Button, 
+    Modal, 
+    ModalHeader, 
+    ModalBody, 
+    ModalFooter 
+} from 'reactstrap';
+
 import './style.css'
 
-let instance;
+let confirmInstance;
 
-export default class Confirm extends Component {
+class Confirm extends Component {
 
     constructor(props) {
         super(props)
-        instance = this
+        confirmInstance = this
         this.state = {
             show: false,
             callback: null
         }
     }
 
-    showAlertLogic = (callback) => {
+    showConfirm = (callback) => {
         this.setState({
             show: true,
             callback,
@@ -30,24 +38,46 @@ export default class Confirm extends Component {
     }
 
     static show(callback) {
-        instance.showConfimr(callback)
+        confirmInstance.showConfirm(callback)
     }
 
     onDismiss = () => {
         this.resetState()
     }
 
+    okButtonClick = async () =>{
+        try{
+            await this.state.callback()
+            this.resetState()
+        }catch(err){
+            // code for error
+        }
+    }
+
     render() {
         let { callback, show } = this.state
+        let {...props} = this.props
         return (
-            <Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
-                <ModalHeader>Nested Modal title</ModalHeader>
-                <ModalBody>Stuff and things</ModalBody>
+            <Modal isOpen={show} toggle={this.onDismiss} {...props}>
+                <ModalHeader>Delete Article</ModalHeader>
+                <ModalBody>Are you sure to delete Article?</ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={toggleNested}>Done</Button>{' '}
-                    <Button color="secondary" onClick={toggleAll}>All Done</Button>
+                    <Button 
+                        outline 
+                        color="secondary" 
+                        onClick={this.onDismiss}
+                    >Cancel</Button>
+                    <Button 
+                        disabled={this.props.loading}
+                        color="danger" 
+                        onClick={this.okButtonClick}
+                    >Delete</Button>
                 </ModalFooter>
             </Modal>
         )
     }
 }
+
+export default connect(state=>({
+    loading: state.ConfirmReducer.loading
+}))(Confirm)
