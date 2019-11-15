@@ -6,7 +6,8 @@
     border: 1px solid #ced4da;
     border-radius: .25rem;
     padding: 10px;
-    max-height: calc(100% - 46px);
+    max-height: 230px;
+    overflow: auto;
 }
 
 .custom-control-label{

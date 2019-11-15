@@ -25,8 +25,7 @@ let actions={
             dispatch(changeConfirmLoading(true))
             try{
                 let response = await articlesService.deleteArticle(`/articles/${article.slug}`)
-                let articleResponse = await actions.fetchArticlesActions(pageSize , page)
-                dispatch({type: actions.CHANGE_ARTICLES_DATA , data: articleResponse.data})
+                dispatch(actions.fetchArticlesActions(pageSize , page))
                 dispatch(changeConfirmLoading(false))
                 return response.data
             }catch(err){

@@ -20,6 +20,11 @@ let appRoutes = [
         path: 'create', 
         component: NewArticle,
         exact: true
+    },
+    { 
+        path: 'edit/:slug', 
+        component: NewArticle,
+        exact: true
     }
 ]
 

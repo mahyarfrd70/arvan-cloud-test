@@ -14,6 +14,7 @@ import buildAlertMessage from '../../helpers/buildErrorMessage'
 import Confirm from '../../components/confirm'
 import './style.css'
 import buildErrorMessage from '../../helpers/buildErrorMessage';
+import moment from 'moment';
 
 let { 
     fetchArticlesActions  , 
@@ -83,9 +84,9 @@ export default function App(props) {
         {
             label: 'Created',
             key: 'createdAt',
-            rendered: (item, object, index) => <p>salam</p>,
+            rendered: (item, object, index) => <p>{moment(item).format('MMM D ,YYYY')}</p>,
             style: {
-                maxWidth: '90px',
+                maxWidth: '110px;',
                 width: '10%'
             }
         },
@@ -98,7 +99,8 @@ export default function App(props) {
                     <DropdownToggle className='right-toggle'>...</DropdownToggle>
                     <DropdownToggle caret className='left-toggle'/>
                     <DropdownMenu>
-                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem
+                            onClick={()=>props.history.push(`/articles/edit/${object.slug}`)}>Edit</DropdownItem>
                         <DropdownItem 
                             onClick={
                                 ()=>Confirm

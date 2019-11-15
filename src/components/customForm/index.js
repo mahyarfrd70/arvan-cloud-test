@@ -6,16 +6,30 @@ import Loading from '../loading'
 import './style.css'
 
 
-let validateObject = (formInputs)=>{
+let validateObject = (formInputs , initialValues)=>{
     let obj = {}
     for(let item of formInputs){
-        obj[item.name] = false
+        if(!initialValues || !initialValues[item.name]){
+            obj[item.name] = false
+        }
     }
     return obj
 }
 
-export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue, ...props}) => {
-    let inputNeedValidate = validateObject(inputs.filter(input=>input.required===true))
+export default ({
+    inputs, 
+    onChangeValue, 
+    onSubmit,
+    buttonTitle,
+    initialFormValue, 
+    buttonProps,
+    formClassStyle,
+    ...props
+}) => {
+    let inputNeedValidate = validateObject(
+        inputs.filter(input=>input.required===true) , 
+        initialFormValue
+    )
     let [inputsValueObject , setInputsValueObject] = useState(initialFormValue || {})
     let [isInvalidField, setIsInvalidField] = useState({...inputNeedValidate})
     let changeFormInput = (e, required) => {
@@ -37,7 +51,6 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue,
         e.preventDefault()
         if(Object.keys(isInvalidField).length === 0){
             onSubmit(inputsValueObject)
-            // dispatch(login(loginFormValue))
         }else{
             let fields = {...isInvalidField}
             Object.keys(fields).forEach(item => {
@@ -49,7 +62,8 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue,
         }
     }
     return (
-        <Form>
+        <Form
+            className={formClassStyle}>
             {inputs.map(input => (
                 <FormGroup key={input.key}>
                     <Label
@@ -59,6 +73,7 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue,
                         value={inputsValueObject[input.name]}
                         size='sm'
                         type={input.type}
+                        {...input.type === 'textarea' && {rows: input.row}}
                         name={input.name}
                         id={input.id}
                         placeholder={input.placeholder}
@@ -73,7 +88,8 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue,
                     color="primary"
                     size="sm"
                     block
-                    onClick={clickLoginButton}>{buttonTitle}</Button>
+                    onClick={clickLoginButton}
+                    {...buttonProps}>{buttonTitle}</Button>
             )}
         </Form>
     )

@@ -22,6 +22,7 @@ export default [
         label: 'Body', 
         name: 'body', 
         type: 'textarea' , 
+        row: 5,
         id:'login-body' ,
         placeholder: 'Enter Body',
         required: true

@@ -4,7 +4,14 @@ import tagsService from '../../services/tags'
 import Loading from '../loading'
 import './style.css'
 
-export default function Tags({containerStyle, values , onChange, inputName, ...props}) {
+export default function Tags({
+    containerStyle, 
+    values , 
+    onChange, 
+    inputName,
+    tagStyleContainer,
+    ...props
+}) {
     let [state , setState] = useState({
         loading: true,
         tags: [],
@@ -37,12 +44,12 @@ export default function Tags({containerStyle, values , onChange, inputName, ...p
         }
     }
     let changeTagsValue = (e)=>{
-        let currentValues = [...values]
+        let currentValues = values? [...values] : []
         let newValues ;
-        if(values.includes(e.target.id)){
+        if(currentValues.includes(e.target.id)){
             newValues = currentValues.filter(item => item !== e.target.id)
         }else{
-            newValues = [...values, e.target.id]
+            newValues = [...currentValues, e.target.id]
         }
         onChange({target: {name: inputName , value: newValues}})
     }
@@ -51,7 +58,7 @@ export default function Tags({containerStyle, values , onChange, inputName, ...p
     }, [])
     return (
         <div 
-            className='tags-container' 
+            className={`tags-container ${tagStyleContainer}`} 
             style={{...containerStyle}}>
             <Input 
                 className='tags-input'

@@ -1,0 +1,28 @@
+.add-article-container{
+    width: 70%;
+}
+
+.add-article-form-container{
+    display: inline-block;
+    width: 75%;
+    padding-right: 25px;
+}
+
+.tags-container-add-article{
+    float: right;
+    margin-top: 32px;
+    width: 25%;
+}
+
+@media(max-width: 768px){
+    .add-article-container{
+        width: 100%;
+    }
+    .add-article-form-container{
+        width: 60%;
+    }
+    
+    .tags-container-add-article{
+        width: 40%;
+    }
+}

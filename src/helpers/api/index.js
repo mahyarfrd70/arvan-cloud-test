@@ -36,9 +36,12 @@ class Api {
              throw err
          }
      }
-     put = async (path) => {
+     put = async (path , body , options) => {
+        let configRequest = {
+            headers: {...this.buildHeaders(options, config.headers)},
+        }
          try{
-             let response = await Axios.put(`${config.baseUrl}${path}`)
+             let response = await Axios.put(`${config.baseUrl}${path}`, {...body} , configRequest)
              return response
          }catch(err){
              throw err
