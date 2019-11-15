@@ -23,6 +23,7 @@ class Auth {
 
     setAuth = ( token ) => {
         localStorage.setItem(this.tokenKey , token)
+        this.auth = token
     }
 
     logout=(callback)=>{

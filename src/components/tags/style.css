@@ -1,0 +1,14 @@
+.tags-input{
+    margin-bottom: 15px
+}
+
+.tags-box{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: 10px;
+    max-height: calc(100% - 46px);
+}
+
+.custom-control-label{
+    font-size: 14px;
+}

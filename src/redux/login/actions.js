@@ -8,11 +8,11 @@ let {setUserData} = appActions
 let actions = {
     CHANGE_FORM_VALUE_LOGIN: 'CHANGE_FORM_VALUE_LOGIN',
     CHANGE_LOADING_LOGIN: 'CHANGE_LOADING_LOGIN',
-    changeInputLogin : (e)=>{
-        return dispatch=>{
-            dispatch({type: actions.CHANGE_FORM_VALUE_LOGIN , data: e.target})
-        }
-    },
+    // changeInputLogin : (e)=>{
+    //     return dispatch=>{
+    //         dispatch({type: actions.CHANGE_FORM_VALUE_LOGIN , data: e.target})
+    //     }
+    // },
     loginUser: (userData) => {
         return async dispatch => {
             dispatch({type: actions.CHANGE_LOADING_LOGIN , data: true})

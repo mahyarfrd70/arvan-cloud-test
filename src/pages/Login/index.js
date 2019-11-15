@@ -12,13 +12,13 @@ import './style.css'
 let { changeInputLogin, loginUser } = loginActions
 
 export default ({history}) => {
-    let loginFormValue = useSelector(state => state.Login.loginFormValue)
+    // let loginFormValue = useSelector(state => state.Login.loginFormValue)
     let loading = useSelector(state => state.Login.loading)
     let isLoggedIn = useSelector(state => state.Auth.idToken ? true : false)
     let dispatch = useDispatch()
-    let submitForm = async () => {
+    let submitForm = async (inputsValueObject) => {
         try{
-            let response = await dispatch(loginUser(loginFormValue))
+            let response = await dispatch(loginUser(inputsValueObject))
             Alert.show('success' , 'you login successfully')
             history.push('/articles')
         }catch(err){

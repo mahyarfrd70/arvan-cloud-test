@@ -14,8 +14,9 @@ let validateObject = (formInputs)=>{
     return obj
 }
 
-export default ({inputs, onChangeValue, onSubmit, buttonTitle, ...props}) => {
+export default ({inputs, onChangeValue, onSubmit, buttonTitle, initialFormValue, ...props}) => {
     let inputNeedValidate = validateObject(inputs.filter(input=>input.required===true))
+    let [inputsValueObject , setInputsValueObject] = useState(initialFormValue || {})
     let [isInvalidField, setIsInvalidField] = useState({...inputNeedValidate})
     let changeFormInput = (e, required) => {
         if(required){
@@ -27,12 +28,15 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, ...props}) => {
                 setIsInvalidField(copyValidate)
             }
         }
-        onChangeValue(e)
+        setInputsValueObject({
+            ...inputsValueObject,
+            [e.target.name] : e.target.value
+        })
     }
     let clickLoginButton = (e) => {
         e.preventDefault()
         if(Object.keys(isInvalidField).length === 0){
-            onSubmit()
+            onSubmit(inputsValueObject)
             // dispatch(login(loginFormValue))
         }else{
             let fields = {...isInvalidField}
@@ -52,6 +56,7 @@ export default ({inputs, onChangeValue, onSubmit, buttonTitle, ...props}) => {
                         for={input.id}>{input.label}</Label>
                     <Input
                         invalid={isInvalidField[input.name]}
+                        value={inputsValueObject[input.name]}
                         size='sm'
                         type={input.type}
                         name={input.name}

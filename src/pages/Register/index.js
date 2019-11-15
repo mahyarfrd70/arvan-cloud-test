@@ -12,13 +12,13 @@ import './style.css'
 let { changeInputRegister, registerUser } = registerActions
 
 export default ({history}) => {
-    let registerFormValue = useSelector(state => state.Register.registerFormValue)
+    // let registerFormValue = useSelector(state => state.Register.registerFormValue)
     let loading = useSelector(state => state.Register.loading)
     let isLoggedIn = useSelector(state => state.Auth.idToken ? true : false)
     let dispatch = useDispatch()
-    let submitForm = async () => {
+    let submitForm = async (inputsValueObject) => {
         try{
-            let response = await dispatch(registerUser(registerFormValue))
+            let response = await dispatch(registerUser(inputsValueObject))
             Alert.show('success' , 'you registered successfully')
             history.push('/articles')
         }catch(err){

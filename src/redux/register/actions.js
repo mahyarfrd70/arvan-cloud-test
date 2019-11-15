@@ -8,11 +8,11 @@ let {setUserData} = appActions
 let actions = {
     CHANGE_LOADING_REGISTER: 'CHANGE_LOADING_REGISTER',
     CHANGE_FORM_VALUE_REGISTER: 'CHANGE_FORM_VALUE_REGISTER',
-    changeInputRegister : (e)=>{
-        return dispatch=>{
-            dispatch({type: actions.CHANGE_FORM_VALUE_REGISTER , data: e.target})
-        }
-    },
+    // changeInputRegister : (e)=>{
+    //     return dispatch=>{
+    //         dispatch({type: actions.CHANGE_FORM_VALUE_REGISTER , data: e.target})
+    //     }
+    // },
     registerUser: (userData) => {
         return async dispatch => {
             dispatch({type: actions.CHANGE_LOADING_REGISTER , data: true})

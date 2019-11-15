@@ -63,11 +63,13 @@ class Confirm extends Component {
                 <ModalBody>Are you sure to delete Article?</ModalBody>
                 <ModalFooter>
                     <Button 
+                        size='sm'
                         outline 
                         color="secondary" 
                         onClick={this.onDismiss}
                     >Cancel</Button>
                     <Button 
+                        size='sm'
                         disabled={this.props.loading}
                         color="danger" 
                         onClick={this.okButtonClick}

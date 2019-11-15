@@ -28,9 +28,30 @@
     margin-left: 25px;
 }
 
+.app-header-container .header-left-container .menu-btn{
+    width: 32px;
+    height: 32px;
+    background-image: url('../../assets//icons/menu-button.png');
+    display: none;
+    line-height: 100%;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+@media (max-width: 992px){
+    .app-header-container .header-left-container .menu-btn{
+        display: inline-block;
+    }
+}
+
 @media(max-width: 400px){
     .app-header-container .header-right-container p{
-        margin-left: 15px;
+        margin-left: 0;
+    }
+
+    .app-header-container .header-right-container h6 ,
+    .app-header-container .header-right-container p{
+        display: block;
     }
 
     .app-header-container .header-btn{

@@ -5,6 +5,18 @@
     transition: all 0.5s;
     color: #fff;
     display: inline-block;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.mask-page-navbar{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 60px);
+    background-color: rgba(112, 112, 112, 0.384);
+    transition: all 0.5s;
+    z-index: 999;
 }
 
 .navbar-app-container h5{
@@ -36,6 +48,16 @@
 
 @media (max-width: 992px){
     .navbar-app-container{
-        width: 0
+        width: 0;
+        position: absolute;
+        left: 0;
+
+    }
+    .navbar-app-container.open{
+        width: 250px;
+    }
+
+    .mask-page-navbar.open{
+        display: block;
     }
 }

@@ -76,7 +76,7 @@ function Main() {
               component={Login}/>
         </Switch>
         <Alert time={3000}/>
-        <Confirm centered size='sm'/>
+        <Confirm centered />
     </Router>
   );
 }
